@@ -1,0 +1,2 @@
+describe Version do
+end
