@@ -15,6 +15,10 @@ class Version
     major == other.major && minor == other.minor && patch == other.patch
   end
 
+  def bump_up_patch!
+    self.patch += 1
+  end
+
   private
 
   def check_version_number(name, variable)
