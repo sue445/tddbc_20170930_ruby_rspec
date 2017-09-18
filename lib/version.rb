@@ -1,8 +1,8 @@
 class Version
   attr_accessor :major, :minor, :patch
 
-  def initialize(majar, minor, patch)
-    @major = majar
+  def initialize(major, minor, patch)
+    @major = major
     @minor = minor
     @patch = patch
   end
