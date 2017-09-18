@@ -24,4 +24,52 @@ describe Version do
       is_asserted_by { version1 == version2 }
     end
   end
+
+  describe ".initialize" do
+    subject { Version.new(major, minor, patch) }
+
+    context "正常系" do
+      using RSpec::Parameterized::TableSyntax
+
+      where(:major, :minor, :patch) do
+        1   | 0   | 0
+        1   | 1   | 1
+        "1" | "1" | "1"
+      end
+
+      with_them do
+        it { expect { subject }.not_to raise_error }
+      end
+    end
+
+    context "異常系" do
+      using RSpec::Parameterized::TableSyntax
+
+      where(:major, :minor, :patch) do
+        # 負数
+        -1 | 1  | 1
+        1  | -1 | 1
+        1  | 1  | -1
+
+        # 空文字
+        "" | 1   | 1
+        1  | ""  | 1
+        1  | 1   | ""
+
+        # nil
+        nil | 1    | 1
+        1   | nil  | 1
+        1   | 1    | nil
+
+        # 数字以外の文字
+        "a" | 1   | 1
+        1   | "a" | 1
+        1   | 1   | "a"
+      end
+
+      with_them do
+        it { expect { subject }.to raise_error ArgumentError }
+      end
+    end
+  end
 end
