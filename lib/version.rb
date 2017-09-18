@@ -19,6 +19,11 @@ class Version
     self.patch += 1
   end
 
+  def bump_up_minor!
+    self.patch = 0
+    self.minor += 1
+  end
+
   private
 
   def check_version_number(name, variable)
