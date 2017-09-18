@@ -72,4 +72,46 @@ describe Version do
       end
     end
   end
+
+  describe "#bump_up_patch!" do
+    let(:version) { Version.new(1, 4, 2) }
+
+    it "patchバージョンが上がること" do
+      version.bump_up_patch!
+
+      aggregate_failures do
+        is_asserted_by { version.major == 1 }
+        is_asserted_by { version.minor == 4 }
+        is_asserted_by { version.patch == 3 }
+      end
+    end
+  end
+
+  describe "#bump_up_minor!" do
+    let(:version) { Version.new(1, 4, 2) }
+
+    it "minorバージョンが上がること" do
+      version.bump_up_minor!
+
+      aggregate_failures do
+        is_asserted_by { version.major == 1 }
+        is_asserted_by { version.minor == 5 }
+        is_asserted_by { version.patch == 0 }
+      end
+    end
+  end
+
+  describe "#bump_up_major!" do
+    let(:version) { Version.new(1, 4, 2) }
+
+    it "majorバージョンが上がること" do
+      version.bump_up_major!
+
+      aggregate_failures do
+        is_asserted_by { version.major == 2 }
+        is_asserted_by { version.minor == 0 }
+        is_asserted_by { version.patch == 0 }
+      end
+    end
+  end
 end
