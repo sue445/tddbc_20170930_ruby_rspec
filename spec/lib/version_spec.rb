@@ -100,4 +100,18 @@ describe Version do
       end
     end
   end
+
+  describe "#bump_up_major!" do
+    let(:version) { Version.new(1, 4, 2) }
+
+    it "majorバージョンが上がること" do
+      version.bump_up_major!
+
+      aggregate_failures do
+        is_asserted_by { version.major == 2 }
+        is_asserted_by { version.minor == 0 }
+        is_asserted_by { version.patch == 0 }
+      end
+    end
+  end
 end
