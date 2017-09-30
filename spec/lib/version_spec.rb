@@ -25,6 +25,29 @@ describe Version do
     end
   end
 
+  describe "#<=>" do
+    it "バージョン 1.4.2 は バージョン 2.1.0 より小さいこと" do
+      version1 = Version.new(1, 4, 2)
+      version2 = Version.new(2, 1, 0)
+
+      is_asserted_by { version1 < version2 }
+    end
+
+    it "バージョン 2.2.0 は バージョン 2.1.4 より大きいこと" do
+      version1 = Version.new(2, 1, 10)
+      version2 = Version.new(2, 1, 4)
+
+      is_asserted_by { version1 > version2 }
+    end
+
+    it "バージョン 2.1.10 は バージョン 2.1.4 より小さいこと" do
+      version1 = Version.new(2, 1, 10)
+      version2 = Version.new(2, 1, 4)
+
+      is_asserted_by { version1 > version2 }
+    end
+  end
+
   describe ".initialize" do
     subject { Version.new(major, minor, patch) }
 
