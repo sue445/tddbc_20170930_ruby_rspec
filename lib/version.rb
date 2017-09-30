@@ -1,6 +1,8 @@
 class Version
   attr_accessor :major, :minor, :patch
 
+  include Comparable
+
   def initialize(major, minor, patch)
     @major = check_version_number("major", major)
     @minor = check_version_number("minor", minor)
@@ -13,6 +15,19 @@ class Version
 
   def ==(other)
     major == other.major && minor == other.minor && patch == other.patch
+  end
+
+  def <=>(other)
+    return -1 if major < other.major
+    return 1 if major > other.major
+
+    return -1 if minor < other.minor
+    return 1 if minor > other.minor
+
+    return -1 if patch < other.patch
+    return 1 if patch > other.patch
+
+    0
   end
 
   def bump_up_patch!
